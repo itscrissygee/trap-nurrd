@@ -2,6 +2,6 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
 export default defineConfig({
-  base: "itscrissygee/trap-nurrd", // Replace with your repository name
   plugins: [react()],
+  base: "/", // Change this from '/repositoryname/' to just '/'
 });
