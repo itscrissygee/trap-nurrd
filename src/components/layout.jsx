@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
 import SpotifyBanner from "./SpotifyBanner";
 import { useCart } from "./CartContext";
-import { Link } from "react-router-dom";
-import logoImage from "../assets/logo.png"; // Updated path
+import { Link, useLocation } from "react-router-dom"; // Add useLocation
+import logoImage from "../assets/logo.png";
 
 const Navigation = () => {
   const { cart } = useCart();
@@ -27,7 +27,9 @@ const Navigation = () => {
               Studio Booking
             </Link>
             <Link to="/cart" className="text-white hover:text-gray-300">
-              Cart ({cart.length})
+              <span className="flex items-center">
+                Cart {cart.length > 0 && <span>({cart.length})</span>}
+              </span>
             </Link>
           </div>
         </div>
@@ -36,12 +38,17 @@ const Navigation = () => {
   );
 };
 
-// Add the Layout component that was missing
 const Layout = ({ children }) => {
+  const location = useLocation();
+  const showSpotifyBanner = ["/", "/t-shirts", "/studio"].includes(
+    location.pathname
+  );
+
   return (
     <div>
+      {showSpotifyBanner && <SpotifyBanner />}
       <Navigation />
-      {children}
+      <main>{children}</main>
     </div>
   );
 };
