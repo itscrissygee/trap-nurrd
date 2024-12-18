@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import SpotifyBanner from "./SpotifyBanner";
 import { useCart } from "./CartContext";
 import { Link } from "react-router-dom";
-import logoImage from "/src/assets/logo.png";
+import logoImage from "../assets/logo.png"; // Updated path
 
 const Navigation = () => {
   const { cart } = useCart();
@@ -35,3 +35,19 @@ const Navigation = () => {
     </nav>
   );
 };
+
+// Add the Layout component that was missing
+const Layout = ({ children }) => {
+  return (
+    <div>
+      <Navigation />
+      {children}
+    </div>
+  );
+};
+
+Layout.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
+export default Layout;
